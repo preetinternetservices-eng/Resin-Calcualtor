@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glass Percentage Calculator</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  padding: 25px;
+}
+.calculator {
+  max-width: 380px;
+  margin: 30px auto;
+  padding: 25px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px #0001;
+}
+h2 { text-align: center; }
+label { display: block; margin-top: 18px; }
+input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px;
+  margin-top: 7px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 17px;
+}
+.result {
+  margin-top: 25px;
+  padding: 18px;
+  background: #e9f5ed;
+  border-radius: 8px;
+  text-align: center;
+}
+#answer {
+  font-size: 32px;
+  font-weight: bold;
+  color: #16733b;
+}
+</style>
+</head>
+<body>
+<div class="calculator">
+  <h2>Glass % Calculator</h2>
+
+  <label>Glass Weight (g)</label>
+  <input type="number" id="glass" min="0" step="any"
+         placeholder="Enter glass weight">
+
+  <label>Resin Weight (g)</label>
+  <input type="number" id="resin" min="0" step="any"
+         placeholder="Enter resin weight">
+
+  <div class="result">
+    <div>Glass Percentage</div>
+    <div id="answer">—</div>
+  </div>
+</div>
+
+<script>
+function calculate() {
+  const glass = document.getElementById("glass").value;
+  const resin = document.getElementById("resin").value;
+  const answer = document.getElementById("answer");
+
+  if (glass === "" || resin === "" ||
+      Number(glass) < 0 || Number(resin) < 0) {
+    answer.textContent = "—";
+    return;
+  }
+
+  const g = Number(glass);
+  const r = Number(resin);
+  const total = g + r;
+
+  answer.textContent = total > 0
+    ? (g / total * 100).toFixed(2) + "%"
+    : "—";
+}
+
+document.getElementById("glass").addEventListener("input", calculate);
+document.getElementById("resin").addEventListener("input", calculate);
+</script>
+</body>
+</html>
